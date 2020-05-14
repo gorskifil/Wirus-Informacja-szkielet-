@@ -5,18 +5,41 @@
     <title>SARS CoV-2</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="styl.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['', 'Zarażenia', ],
+          [1,  1000     ],
+          [10,  1170      ],
+          [20, 660       ],
+          [30,  1030      ]
+        ]);
+
+        var options = {
+          title: 'Zarażenia wirusem w dniach',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
     
 </head>
 <body>
+
     <div class="strona">
         <div class="naglowek"><h1>SARS CoV-2 INFORMACJA</h1>
         </div>
         <div class="pudlo-1">
-            <h2>Zakażeni</h2><button class="btn btn-primary">odśwież</button><div id="pudlo_wynik_zarażonych"></div>
+            <div id="curve_chart" style="width: 900px; height: 500px"></div>
         </div> 
-            <div class="pudlo-1">
-            <h2>Wyzdrowiali</h2><button class="btn btn-primary">odśwież</button><div id="pudlo_wynik_wyzdrowiałych"></div>
-        </div>  
             <div class="pudlo-2">
             <h2>Aktualna mapa lokalizacji zarażonych</h2>
         </div>  
